@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <title>DJ Requests</title>
+</head>
+<body>
+    <h1>Song Requests</h1>
+    <table border="1" cellpadding="5">
+        <tr><th>Artist</th><th>Title</th><th>Count</th><th>Played</th><th>Action</th></tr>
+        {% for s in songs %}
+        <tr>
+            <td>{{ s.artist }}</td>
+            <td>{{ s.title }}</td>
+            <td>{{ s.count }}</td>
+            <td>{{ 'Yes' if s.played else 'No' }}</td>
+            <td>
+                {% if not s.played %}
+                <form method="post" style="display:inline">
+                    <input type="hidden" name="played" value="{{ s.id }}">
+                    <button type="submit">Mark as Played</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
